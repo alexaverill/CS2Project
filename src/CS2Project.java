@@ -1,4 +1,7 @@
 //Default Class for the CS project
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class CS2Project {
 	private static String preOrder(){
 		//take in a BST and return the preorder transversal
@@ -17,6 +20,11 @@ public class CS2Project {
 	}
 	public static void main(String[] args){
 		//Open File input stream.
+		try {
+			Scanner stringFile = new Scanner(new File("string.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		//read in string, and then begin to start building BST
 	}
 }
