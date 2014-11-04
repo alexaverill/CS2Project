@@ -17,13 +17,38 @@ public class BinarySearchTree {
 		}
 	}
 	public void BinarySearchTree(){
-		base = null; //Create a blank binary search tree;
+		root = null; //Create a blank binary search tree;
 	}
-	public void insert(Node node, String data){
-		if(node == null){
+	public void insert(String data){
+		if(root  == null){
 			//if the bst is not yet created
-			node = new Node(data); //root
+			root = new Node(data); //root
+		}else{
+			Node current = new Node(data);
+			//loop through tree
+			Node tmp = root;
+			while(tmp != null){
+				if(current.dataString < tmp.dataString){ //fix string comparisons
+					//insert left child
+					if(tmp.LeftBranch != null){
+						tmp = tmp.LeftBranch;
+					}else{
+						current.BranchType = "left";
+						tmp.LeftBranch = current;
+						
+					}
+				}else if (current.dataString > tmp.dataString){ //fix string comparison
+					if(tmp.RightBranch != null){
+						tmp = tmp.RightBranch;
+					}else{
+						current.BranchType = "right";
+						tmp.RightBranch = current;
+					}
+				}
+				
+			}
 		}
+		
 		
 	}
 }
