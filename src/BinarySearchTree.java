@@ -20,35 +20,33 @@ public class BinarySearchTree {
 		root = null; //Create a blank binary search tree;
 	}
 	public void insert(String data){
+		Node newNode = new Node(data);
+		Node temp = root;
+		
+		boolean bRun = true;
+		
 		if(root  == null){
 			//if the bst is not yet created
-			root = new Node(data); //root
-		}else{
-			Node current = new Node(data);
+			root = newNode; //root
+		}
+		else{
 			//loop through tree
-			Node tmp = root;
-			while(tmp != null){
-				if(current.dataString < tmp.dataString){ //fix string comparisons
-					//insert left child
-					if(tmp.LeftBranch != null){
-						tmp = tmp.LeftBranch;
-					}else{
-						current.BranchType = "left";
-						tmp.LeftBranch = current;
-						
-					}
-				}else if (current.dataString > tmp.dataString){ //fix string comparison
-					if(tmp.RightBranch != null){
-						tmp = tmp.RightBranch;
-					}else{
-						current.BranchType = "right";
-						tmp.RightBranch = current;
-					}
+			while(temp != null && bRun == true){
+				if((newNode.dataString).compareTo(temp.dataString) < 0){ //fix string comparisons
+					temp = temp.LeftBranch;
 				}
-				
+				else if((newNode.dataString).compareTo(temp.dataString) > 0){ //fix string comparison
+					temp = temp.RightBranch;
+				}
+				else if((newNode.dataString).equals(temp.dataString)){
+					bRun = false;
+				}
 			}
+			
+		if(bRun == true){
+			temp = newNode;
 		}
 		
-		
+		}
 	}
 }
