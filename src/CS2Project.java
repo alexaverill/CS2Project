@@ -26,5 +26,7 @@ public class CS2Project {
 			e.printStackTrace();
 		}
 		//read in string, and then begin to start building BST
+		
+		//test comment
 	}
 }
