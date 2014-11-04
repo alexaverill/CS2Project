@@ -3,20 +3,21 @@ public class BinarySearchTree {
 	private Node root;
 	
 	private static class Node{
-		Node LeftBranch;
-		Node RightBranch;
+		Node leftBranch;
+		Node rightBranch;
 		String dataString;
 		Node parent;
 		String BranchType; //is this a left or right branch of parent
 		
 		Node (String stringInput){
-			LeftBranch = null;
-			RightBranch = null;
+			leftBranch = null;
+			rightBranch = null;
+			parent = null;
 			dataString = stringInput;
 			
 		}
 	}
-	public void BinarySearchTree(){
+	public BinarySearchTree(){
 		root = null; //Create a blank binary search tree;
 	}
 	public void insert(String data){
@@ -31,22 +32,28 @@ public class BinarySearchTree {
 		}
 		else{
 			//loop through tree
-			while(temp != null && bRun == true){
+			while(temp != null && !((newNode.dataString).equals(temp.dataString)) && bRun == true){
 				if((newNode.dataString).compareTo(temp.dataString) < 0){ //fix string comparisons
-					temp = temp.LeftBranch;
+					if(temp.leftBranch == null){
+						temp.leftBranch = newNode;
+						newNode.parent = temp;
+						bRun = false;
+					}
+					else{
+						temp = temp.leftBranch;	
+					}
 				}
 				else if((newNode.dataString).compareTo(temp.dataString) > 0){ //fix string comparison
-					temp = temp.RightBranch;
-				}
-				else if((newNode.dataString).equals(temp.dataString)){
-					bRun = false;
+					if(temp.rightBranch == null){
+						temp.rightBranch = newNode;
+						newNode.parent = temp;
+						bRun = false;
+					}
+					else{
+						temp = temp.rightBranch;
+					}
 				}
 			}
-			
-		if(bRun == true){
-			temp = newNode;
-		}
-		
 		}
 	}
 }
