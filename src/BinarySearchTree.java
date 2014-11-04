@@ -1,12 +1,12 @@
 
 public class BinarySearchTree {
-	private Node base;
+	private Node root;
 	
 	private static class Node{
 		Node LeftBranch;
 		Node RightBranch;
 		String dataString;
-		String parent;
+		Node parent;
 		String BranchType; //is this a left or right branch of parent
 		
 		Node (String stringInput){
@@ -19,7 +19,11 @@ public class BinarySearchTree {
 	public void BinarySearchTree(){
 		base = null; //Create a blank binary search tree;
 	}
-	public void insert(String data){
+	public void insert(Node node, String data){
+		if(node == null){
+			//if the bst is not yet created
+			node = new Node(data); //root
+		}
 		
 	}
 }
