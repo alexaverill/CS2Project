@@ -19,5 +19,7 @@ public class BinarySearchTree {
 	public void BinarySearchTree(){
 		base = null; //Create a blank binary search tree;
 	}
-	
+	public void insert(String data){
+		
+	}
 }
