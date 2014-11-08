@@ -2,7 +2,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 public class CS2Project {
+
 	private static String preOrder(){
 		//take in a BST and return the preorder transversal
 		String out = "Placeholder"; // this will be the ordered output from BST

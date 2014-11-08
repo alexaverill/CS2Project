@@ -32,8 +32,8 @@ public class BinarySearchTree {
 		}
 		else{
 			//loop through tree
-			while(temp != null && !((newNode.dataString).equals(temp.dataString)) && bRun == true){
-				if((newNode.dataString).compareTo(temp.dataString) < 0){ //fix string comparisons
+			while(temp != null && !((newNode.dataString.toUpperCase()).equals(temp.dataString.toUpperCase())) && bRun == true){
+				if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) < 0){ //fix string comparisons
 					if(temp.leftBranch == null){
 						temp.leftBranch = newNode;
 						newNode.parent = temp;
@@ -43,7 +43,7 @@ public class BinarySearchTree {
 						temp = temp.leftBranch;	
 					}
 				}
-				else if((newNode.dataString).compareTo(temp.dataString) > 0){ //fix string comparison
+				else if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) > 0){ //fix string comparison
 					if(temp.rightBranch == null){
 						temp.rightBranch = newNode;
 						newNode.parent = temp;
