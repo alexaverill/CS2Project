@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+
 
 public class BinarySearchTree {
 	private Node root;
+	private ArrayList preorderList = new ArrayList();
+	private ArrayList inorderList = new ArrayList();
+	private ArrayList postorderList = new ArrayList();
 	
 	private static class Node{
 		Node leftBranch;
@@ -55,5 +60,86 @@ public class BinarySearchTree {
 				}
 			}
 		}
+	}
+	
+	public void setPreorder()
+	{
+		preorderRec(this.root);
+	}
+	
+	public void setInorder()
+	{
+		inorderRec(this.root);
+	}
+	
+	public void setPostorder()
+	{
+		postorderRec(this.root);
+	}
+	
+	private void preorderRec(Node curr)
+	{
+		if(curr == null)
+		{
+			return;
+		}
+		
+		preorderList.add(curr.dataString);
+		preorderRec(curr.leftBranch);
+		preorderRec(curr.rightBranch);
+	}
+	
+	private void inorderRec(Node curr)
+	{
+		if(curr == null)
+		{
+			return;
+		}
+		
+		inorderRec(curr.leftBranch);
+		inorderList.add(curr.dataString);
+		inorderRec(curr.rightBranch);
+	}
+	
+	private void postorderRec(Node curr)
+	{
+		if(curr == null)
+		{
+			return;
+		}
+		
+		postorderRec(curr.leftBranch);
+		postorderRec(curr.rightBranch);
+		postorderList.add(curr.dataString);
+	}
+	
+	public void getPreorder()
+	{
+		for(int i = 0; i<(this.preorderList.size()); i++)
+		{
+			System.out.print(this.preorderList.get(i) + ", ");
+		}
+		
+		System.out.println("");
+	}
+	
+	public void getInorder()
+	{
+		for(int i = 0; i<(this.inorderList.size()); i++)
+		{
+			System.out.print(this.inorderList.get(i) + ", ");
+		}
+		
+		System.out.println("");
+	}
+	
+	public void getPostorder()
+	{
+		for(int i = 0; i<(this.postorderList.size()); i++)
+		{
+			System.out.print(this.postorderList.get(i) + ", ");
+		}
+		
+		System.out.println("");
 	}
 }
