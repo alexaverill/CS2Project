@@ -29,10 +29,10 @@ public class CS2Project
 		test.setInorder();
 		test.setPostorder();
 		
-		test.getPreorder();
-		test.getInorder();
-		test.getPostorder();
+		System.out.println(test.getPreorder().toString());
+		System.out.println(test.getInorder().toString());
+		System.out.println(test.getPostorder().toString());
 		
-		System.out.println("hello");
+		test.treeOutput();
 	}
 }

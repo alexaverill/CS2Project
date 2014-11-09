@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 public class BinarySearchTree {
@@ -113,33 +115,53 @@ public class BinarySearchTree {
 		postorderList.add(curr.dataString);
 	}
 	
-	public void getPreorder()
+	public ArrayList getPreorder()
 	{
-		for(int i = 0; i<(this.preorderList.size()); i++)
-		{
-			System.out.print(this.preorderList.get(i) + ", ");
-		}
-		
-		System.out.println("");
+		return preorderList;
 	}
 	
-	public void getInorder()
+	public ArrayList getInorder()
 	{
-		for(int i = 0; i<(this.inorderList.size()); i++)
-		{
-			System.out.print(this.inorderList.get(i) + ", ");
-		}
-		
-		System.out.println("");
+		return inorderList;
 	}
 	
-	public void getPostorder()
+	public ArrayList getPostorder()
 	{
-		for(int i = 0; i<(this.postorderList.size()); i++)
+		return postorderList;
+	}
+	
+	public void treeOutput()
+	{
+		if(root == null)
 		{
-			System.out.print(this.postorderList.get(i) + ", ");
+			return;
 		}
 		
-		System.out.println("");
+		Queue<Node> nodesQueue = new LinkedList<Node>();
+		int nodesInCurrentLevel = 1;
+		int nodesInNextLevel = 0;
+		
+		nodesQueue.add(root);
+		
+		while(!nodesQueue.isEmpty())
+		{
+			Node currNode = nodesQueue.poll();
+			nodesInCurrentLevel--;
+			
+			if(currNode != null)
+			{
+				System.out.print(currNode.dataString + " ");
+				nodesQueue.add(currNode.leftBranch);
+				nodesQueue.add(currNode.rightBranch);
+				nodesInNextLevel += 2;
+			}
+			
+			if(nodesInCurrentLevel == 0)
+			{
+				System.out.println("");
+				nodesInCurrentLevel = nodesInNextLevel;
+				nodesInNextLevel = 0;
+			}
+		}
 	}
 }
