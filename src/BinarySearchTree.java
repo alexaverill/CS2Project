@@ -40,20 +40,24 @@ public class BinarySearchTree {
 		else{
 			//loop through tree
 			while(temp != null && !((newNode.dataString.toUpperCase()).equals(temp.dataString.toUpperCase())) && bRun == true){
-				if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) < 0){ //fix string comparisons
+				if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) < 0){ 
 					if(temp.leftBranch == null){
+						//add the data to the left branch of the BST if there is no left branch
 						temp.leftBranch = newNode;
 						newNode.parent = temp;
+						newNode.BranchType = "left";
 						bRun = false;
 					}
 					else{
 						temp = temp.leftBranch;	
 					}
 				}
-				else if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) > 0){ //fix string comparison
+				else if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) > 0){ 
 					if(temp.rightBranch == null){
+						//add to the right branch when it is empty
 						temp.rightBranch = newNode;
 						newNode.parent = temp;
+						newNode.BranchType = "right";
 						bRun = false;
 					}
 					else{
@@ -129,7 +133,22 @@ public class BinarySearchTree {
 	{
 		return postorderList;
 	}
-	
+	public String returnBranch(Node node){
+		String output= "";
+		if(node.leftBranch != null && node.rightBranch != null){
+			//has two branches
+			output +="/  \\"; 
+		}else if(node.leftBranch != null && node.rightBranch == null){
+			//only has a left branch
+			//System.out.println();
+			output +="/";
+		}else if(node.leftBranch == null && node.rightBranch != null){
+			//only has a right branch
+			
+			output += "\\";
+		}
+		return output;
+	}
 	public void treeOutput()
 	{
 		if(root == null)
@@ -140,7 +159,10 @@ public class BinarySearchTree {
 		Queue<Node> nodesQueue = new LinkedList<Node>();
 		int nodesInCurrentLevel = 1;
 		int nodesInNextLevel = 0;
-		
+		boolean isRoot = true; //need to use this to control the branch display.
+		String outputString = "";
+		String tmpStringData="";
+		String tmpStringBranch="";
 		nodesQueue.add(root);
 		
 		while(!nodesQueue.isEmpty())
@@ -150,15 +172,37 @@ public class BinarySearchTree {
 			
 			if(currNode != null)
 			{
-				System.out.print(currNode.dataString + " ");
+				
+				if(isRoot){
+					outputString += currNode.dataString;
+				}else{
+						if(currNode.BranchType.equals("left")){
+							tmpStringBranch +="/   ";
+						}else if(currNode.BranchType.equals("right")){
+							tmpStringBranch +=" \\";
+							tmpStringData += " ";
+						}
+					
+					tmpStringData += currNode.dataString;
+				}
+				//System.out.print(currNode.dataString + " ");
+				//System.out.print(currNode.BranchType);
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
 				nodesInNextLevel += 2;
+				
 			}
 			
 			if(nodesInCurrentLevel == 0)
 			{
-				System.out.println("");
+				if(!isRoot){
+					outputString = tmpStringBranch +"\n"+tmpStringData;
+					tmpStringData = "";
+					tmpStringBranch = "";
+				}
+				System.out.println(outputString);
+				isRoot = false;
+				//System.out.println("");
 				nodesInCurrentLevel = nodesInNextLevel;
 				nodesInNextLevel = 0;
 			}
