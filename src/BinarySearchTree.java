@@ -157,6 +157,65 @@ public class BinarySearchTree {
 		}
 		return spaces;
 	}
+	public int[] treeHeight(){
+		int treeHeight = 0;
+		int[] data = new int[2];
+		int numberPairs = 0;
+		if(root == null)
+		{
+			data[0] = treeHeight;
+			data[1] = numberPairs;
+			return data;
+		}
+		
+		Queue<Node> nodesQueue = new LinkedList<Node>();
+		int nodesInCurrentLevel = 1;
+		int nodesInNextLevel = 0;
+		
+		nodesQueue.add(root);
+		boolean isRoot = true;
+		boolean hasPartner =  false;
+		while(!nodesQueue.isEmpty())
+				{
+					
+					Node currNode = nodesQueue.poll();
+					nodesInCurrentLevel--;
+					
+					if(currNode != null)
+					{
+					if(isRoot){
+						treeHeight++;
+						isRoot = false;
+					}else{
+						if(currNode.BranchType.equals("left")){
+							treeHeight++;
+							hasPartner = true;
+						}else if(currNode.BranchType.equals("right")){
+							if(hasPartner){
+								numberPairs ++;
+								hasPartner = false;
+							}else{
+								treeHeight++;
+							}
+						}
+					}
+						nodesQueue.add(currNode.leftBranch);
+						nodesQueue.add(currNode.rightBranch);
+						nodesInNextLevel += 2;
+						//hasPartner = false;
+						
+					}
+					
+					if(nodesInCurrentLevel == 0){
+						//System.out.println("");
+						nodesInCurrentLevel = nodesInNextLevel;
+						nodesInNextLevel = 0;
+					}
+				}
+		data[0] = treeHeight;
+		data[1] = numberPairs;
+		return data;
+	}
 	public void treeOutput()
 	{
 		//we are going to assume that we have a 10 character string to start.
@@ -173,12 +232,17 @@ public class BinarySearchTree {
 		Queue<Node> nodesQueue = new LinkedList<Node>();
 		int nodesInCurrentLevel = 1;
 		int nodesInNextLevel = 0;
+		int[] treeInfo = treeHeight();
+		int treeHeight = treeInfo[0]; // use to calculate width of window;
+		int numberPairs = treeInfo[1];
 		boolean isRoot = true; //need to use this to control the branch display.
 		String outputString = "";
 		String tmpStringData="";
 		String tmpStringBranch="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
+		System.out.print(treeHeight);
+		System.out.print(numberPairs);
 		while(!nodesQueue.isEmpty())
 		{
 			
