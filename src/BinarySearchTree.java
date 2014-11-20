@@ -39,8 +39,8 @@ public class BinarySearchTree {
 		}
 		else{
 			//loop through tree
-			while(temp != null && !((newNode.dataString.toUpperCase()).equals(temp.dataString.toUpperCase())) && bRun == true){
-				if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) < 0){ 
+			while(temp != null && bRun == true){
+				if((newNode.dataString).compareTo(temp.dataString) < 0){ 
 					if(temp.leftBranch == null){
 						//add the data to the left branch of the BST if there is no left branch
 						temp.leftBranch = newNode;
@@ -52,7 +52,7 @@ public class BinarySearchTree {
 						temp = temp.leftBranch;	
 					}
 				}
-				else if((newNode.dataString.toUpperCase()).compareTo(temp.dataString.toUpperCase()) > 0){ 
+				else if((newNode.dataString).compareTo(temp.dataString) > 0){ 
 					if(temp.rightBranch == null){
 						//add to the right branch when it is empty
 						temp.rightBranch = newNode;
@@ -149,8 +149,22 @@ public class BinarySearchTree {
 		}
 		return output;
 	}
+	public String returnSpacing(int number){
+		// loops and builds a spacing string.
+		String spaces = "";
+		for(int x=0; x<=number;x++){
+			spaces +=" ";
+		}
+		return spaces;
+	}
 	public void treeOutput()
 	{
+		//we are going to assume that we have a 10 character string to start.
+				//thus we can assume that the max width per level to be at minimum 20 characters.
+				//however we need to have padding so if we assume that we have 10 char padding overall
+				// and then a 5 char before element 1 and then 5 after element 1
+				//max width then become 30 characters, so if we put the root at 15-1/2(root.length)
+				
 		if(root == null)
 		{
 			return;
@@ -164,9 +178,10 @@ public class BinarySearchTree {
 		String tmpStringData="";
 		String tmpStringBranch="";
 		nodesQueue.add(root);
-		
+		boolean hasPartner = false;
 		while(!nodesQueue.isEmpty())
 		{
+			
 			Node currNode = nodesQueue.poll();
 			nodesInCurrentLevel--;
 			
@@ -174,13 +189,29 @@ public class BinarySearchTree {
 			{
 				
 				if(isRoot){
+					//get length of root. 
+					int len = currNode.dataString.length();
+					int spacing = 15- (len/2)+2;
+					String spacingString = returnSpacing(spacing);
+					outputString += spacingString;
 					outputString += currNode.dataString;
 				}else{
 						if(currNode.BranchType.equals("left")){
-							tmpStringBranch +="/   ";
+							tmpStringBranch += returnSpacing(12);
+							tmpStringData += returnSpacing(10);
+							tmpStringBranch +="/";
+							hasPartner = true;
 						}else if(currNode.BranchType.equals("right")){
-							tmpStringBranch +=" \\";
-							tmpStringData += " ";
+							if(hasPartner){
+								hasPartner = false;
+								tmpStringBranch += returnSpacing(8);
+								tmpStringData +=returnSpacing(6);
+							}else{
+								tmpStringBranch += returnSpacing(12);
+								tmpStringData +=returnSpacing(10);
+							}
+							tmpStringBranch +="\\";
+							tmpStringData += "";
 						}
 					
 					tmpStringData += currNode.dataString;
@@ -190,6 +221,7 @@ public class BinarySearchTree {
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
 				nodesInNextLevel += 2;
+				//hasPartner = false;
 				
 			}
 			
