@@ -243,6 +243,8 @@ public class BinarySearchTree {
 		boolean hasPartner = false;
 		System.out.print(treeHeight);
 		System.out.print(numberPairs);
+		int width = (treeHeight*10)/2 +(numberPairs*10);
+		String currentParent="";
 		while(!nodesQueue.isEmpty())
 		{
 			
@@ -255,24 +257,23 @@ public class BinarySearchTree {
 				if(isRoot){
 					//get length of root. 
 					int len = currNode.dataString.length();
-					int spacing = 15- (len/2)+2;
+					int spacing = (width/2) - (len/2)+2;
 					String spacingString = returnSpacing(spacing);
 					outputString += spacingString;
 					outputString += currNode.dataString;
 				}else{
 						if(currNode.BranchType.equals("left")){
-							tmpStringBranch += returnSpacing(12);
-							tmpStringData += returnSpacing(10);
+							tmpStringBranch += returnSpacing(width/2);
+							tmpStringData += returnSpacing(width/2);
 							tmpStringBranch +="/";
-							hasPartner = true;
+							currentParent = currNode.dataString;
 						}else if(currNode.BranchType.equals("right")){
-							if(hasPartner){
-								hasPartner = false;
-								tmpStringBranch += returnSpacing(8);
-								tmpStringData +=returnSpacing(6);
+							if((currNode.parent.dataString).equals(currentParent)){
+								tmpStringBranch += returnSpacing(5);
+								tmpStringData +=returnSpacing(5);
 							}else{
-								tmpStringBranch += returnSpacing(12);
-								tmpStringData +=returnSpacing(10);
+								tmpStringBranch += returnSpacing(width/4);
+								tmpStringData +=returnSpacing(width/4);
 							}
 							tmpStringBranch +="\\";
 							tmpStringData += "";

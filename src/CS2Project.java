@@ -29,9 +29,9 @@ public class CS2Project
 		test.setInorder();
 		test.setPostorder();
 		
-		System.out.println(test.getPreorder().toString());
-		System.out.println(test.getInorder().toString());
-		System.out.println(test.getPostorder().toString());
+		System.out.println("PreOrder: "+test.getPreorder().toString());
+		System.out.println("InOrder: " +test.getInorder().toString());
+		System.out.println("PostOrder: "+test.getPostorder().toString());
 		
 		test.treeOutput();
 	}
