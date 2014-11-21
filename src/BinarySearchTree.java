@@ -262,17 +262,23 @@ public class BinarySearchTree {
 					outputString += spacingString;
 					outputString += currNode.dataString;
 				}else{
-						if(currNode.dataString.equals("zzz")){
-							//System.out.print("ccc p"+currNode.parent.leftBranch.parent.dataString);
+						if(currNode.dataString.equals("Hello")){
+							System.out.print("test l"+currNode.leftBranch.dataString);
 						}
 						if(currNode.BranchType.equals("left")){
 							tmpStringBranch += returnSpacing(width/2);
-							tmpStringData += returnSpacing(width/2);
+							tmpStringData += returnSpacing((width/2)-5);
 							tmpStringBranch +="/";
+							width -=10;
 
 						}else if(currNode.BranchType.equals("right")){
-									tmpStringBranch += returnSpacing(5);
-									tmpStringData +=returnSpacing(5);
+								if(currNode.parent.leftBranch !=null){
+									tmpStringBranch += returnSpacing(1);
+									tmpStringData +=returnSpacing(1);
+								}else{
+									tmpStringBranch += returnSpacing(width/4);
+									tmpStringData +=returnSpacing(width/4);
+								}
 							/*}else{
 								tmpStringBranch += returnSpacing(width/4);
 								tmpStringData +=returnSpacing(width/4);
