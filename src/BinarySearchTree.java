@@ -271,20 +271,8 @@ public class BinarySearchTree {
 							tmpStringBranch +="/";
 
 						}else if(currNode.BranchType.equals("right")){
-								//breaks because I forgot right branches can be parents...
-							if(currNode.parent.leftBranch!=null){
-								if((currNode.parent.leftBranch.parent).equals(currNode.parent)){
-									
-									tmpStringBranch += returnSpacing(10);
-									tmpStringData +=returnSpacing(10);
-								}else{
-									tmpStringBranch += returnSpacing(width/2);
-									tmpStringData +=returnSpacing(width/2);
-								}
-							}else{
-								tmpStringBranch += returnSpacing(width/2);
-								tmpStringData +=returnSpacing(width/2);
-							}
+									tmpStringBranch += returnSpacing(5);
+									tmpStringData +=returnSpacing(5);
 							/*}else{
 								tmpStringBranch += returnSpacing(width/4);
 								tmpStringData +=returnSpacing(width/4);
