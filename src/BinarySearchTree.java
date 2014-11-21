@@ -244,7 +244,7 @@ public class BinarySearchTree {
 		System.out.print(treeHeight);
 		System.out.print(numberPairs);
 		int width = (treeHeight*10)/2 +(numberPairs*10);
-		String currentParent="";
+		String lastParent="";
 		while(!nodesQueue.isEmpty())
 		{
 			
@@ -262,19 +262,33 @@ public class BinarySearchTree {
 					outputString += spacingString;
 					outputString += currNode.dataString;
 				}else{
+						if(currNode.dataString.equals("zzz")){
+							//System.out.print("ccc p"+currNode.parent.leftBranch.parent.dataString);
+						}
 						if(currNode.BranchType.equals("left")){
 							tmpStringBranch += returnSpacing(width/2);
 							tmpStringData += returnSpacing(width/2);
 							tmpStringBranch +="/";
-							currentParent = currNode.dataString;
+
 						}else if(currNode.BranchType.equals("right")){
-							if((currNode.parent.dataString).equals(currentParent)){
-								tmpStringBranch += returnSpacing(5);
-								tmpStringData +=returnSpacing(5);
+								//breaks because I forgot right branches can be parents...
+							if(currNode.parent.leftBranch!=null){
+								if((currNode.parent.leftBranch.parent).equals(currNode.parent)){
+									
+									tmpStringBranch += returnSpacing(10);
+									tmpStringData +=returnSpacing(10);
+								}else{
+									tmpStringBranch += returnSpacing(width/2);
+									tmpStringData +=returnSpacing(width/2);
+								}
 							}else{
+								tmpStringBranch += returnSpacing(width/2);
+								tmpStringData +=returnSpacing(width/2);
+							}
+							/*}else{
 								tmpStringBranch += returnSpacing(width/4);
 								tmpStringData +=returnSpacing(width/4);
-							}
+							}*/
 							tmpStringBranch +="\\";
 							tmpStringData += "";
 						}
