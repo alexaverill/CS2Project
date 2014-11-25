@@ -32,7 +32,7 @@ public class CS2Project
 		System.out.println("PreOrder: "+test.getPreorder().toString());
 		System.out.println("InOrder: " +test.getInorder().toString());
 		System.out.println("PostOrder: "+test.getPostorder().toString());
-		
+		//test.dfsOutput();
 		test.treeOutput();
 	}
 }

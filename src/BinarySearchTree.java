@@ -216,6 +216,13 @@ public class BinarySearchTree {
 		data[1] = numberPairs;
 		return data;
 	}
+	public void dfsOutput(){
+		ArrayList dfs = this.getPreorder();
+		for(int x=0;x<dfs.size(); x++){
+			String current = dfs.get(x).toString();
+			System.out.println(current);
+		}
+	}
 	public void treeOutput()
 	{
 		//we are going to assume that we have a 10 character string to start.
@@ -239,6 +246,8 @@ public class BinarySearchTree {
 		String outputString = "";
 		String tmpStringData="";
 		String tmpStringBranch="";
+		String rightMost;
+		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
 		System.out.print(treeHeight);
@@ -261,23 +270,36 @@ public class BinarySearchTree {
 					String spacingString = returnSpacing(spacing);
 					outputString += spacingString;
 					outputString += currNode.dataString;
+					previousRoot = currNode.dataString;
 				}else{
-						if(currNode.dataString.equals("Hello")){
-							System.out.print("test l"+currNode.leftBranch.dataString);
+						
+						if(currNode.dataString.equals("bbb")){
+							//System.out.print("test l"+currNode.parent.dataString);
 						}
 						if(currNode.BranchType.equals("left")){
-							tmpStringBranch += returnSpacing(width/2);
-							tmpStringData += returnSpacing((width/2)-5);
-							tmpStringBranch +="/";
-							width -=10;
-
+							if(currNode.parent.dataString.equals(previousRoot)){
+								tmpStringBranch += returnSpacing(width/2);
+								tmpStringData += returnSpacing((width/2)-5);
+								tmpStringBranch +="/";
+								width -=10;
+							}else{
+								tmpStringBranch += returnSpacing(width/2+width/6);
+								tmpStringData += returnSpacing((width-13)-5);
+								tmpStringBranch +="/";
+								//width -=10;
+							}
 						}else if(currNode.BranchType.equals("right")){
 								if(currNode.parent.leftBranch !=null){
 									tmpStringBranch += returnSpacing(1);
 									tmpStringData +=returnSpacing(1);
 								}else{
-									tmpStringBranch += returnSpacing(width/4);
-									tmpStringData +=returnSpacing(width/4);
+									if(currNode.parent.dataString.equals(previousRoot)){
+										tmpStringBranch += returnSpacing(width/4);
+										tmpStringData +=returnSpacing(width/4);
+									}else{
+										tmpStringBranch += returnSpacing(width/2+width/6);
+										tmpStringData +=returnSpacing(width/2+width/6);
+									}
 								}
 							/*}else{
 								tmpStringBranch += returnSpacing(width/4);
@@ -293,6 +315,7 @@ public class BinarySearchTree {
 				//System.out.print(currNode.BranchType);
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
+				//previousRoot = currNode.dataString;
 				nodesInNextLevel += 2;
 				//hasPartner = false;
 				
