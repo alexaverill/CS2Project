@@ -255,8 +255,6 @@ public class BinarySearchTree {
 		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
-		System.out.print(treeHeight);
-		System.out.print(numberPairs);
 		int width = (treeHeight*10)/2 +(numberPairs*10);
 		String lastParent="";
 		while(!nodesQueue.isEmpty())
@@ -288,7 +286,7 @@ public class BinarySearchTree {
 								strLen = (currNode.dataString.toString()).length();
 								endW = wF-(strLen/2);
 								tmpStringBranch += returnSpacing(endW);
-								tmpStringData +=returnSpacing(endW);
+								tmpStringData +=returnSpacing(endW-strLen/2);
 								tmpStringBranch +="/"+returnSpacing(5);
 								width -=3;
 							}else{
@@ -299,7 +297,7 @@ public class BinarySearchTree {
 								strLen = (currNode.dataString.toString()).length();
 								endW = wF-(strLen/2);
 								tmpStringBranch += returnSpacing(endW);
-								tmpStringData +=returnSpacing(endW);
+								tmpStringData +=returnSpacing(endW-strLen/2);
 								tmpStringBranch +="/"+returnSpacing(5);
 								width -=3;
 							}
@@ -327,10 +325,6 @@ public class BinarySearchTree {
 										//width -=5;
 									}
 								}
-							/*}else{
-								tmpStringBranch += returnSpacing(width/4);
-								tmpStringData +=returnSpacing(width/4);
-							}*/
 							tmpStringBranch +="\\";
 							tmpStringData += "";
 						}
