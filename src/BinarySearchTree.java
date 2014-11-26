@@ -276,7 +276,7 @@ public class BinarySearchTree {
 					previousRoot = currNode.dataString;
 				}else{
 						
-						if(currNode.dataString.equals("b")){
+						if(currNode.dataString.equals("ii")){
 							//System.out.print("test l"+currNode.parent.dataString);
 						}
 						if(currNode.BranchType.equals("left")){
@@ -287,18 +287,18 @@ public class BinarySearchTree {
 								endW = wF-(strLen/2);
 								tmpStringBranch += returnSpacing(endW);
 								tmpStringData +=returnSpacing(endW-strLen/2);
-								tmpStringBranch +="/"+returnSpacing(5);
+								tmpStringBranch +="/"+returnSpacing(this.stringMax/2);
 								width -=3;
 							}else{
 								/*tmpStringBranch += returnSpacing(width/2+width/6);
 								tmpStringData += returnSpacing(width/2+width/8);*/
-								wF = width/2+width/6; //formula for the width, based on trial and error 
+								wF = width/2+width/8; //+width/6; //formula for the width, based on trial and error 
 								// we need to pad each string to be 10 chars as well
 								strLen = (currNode.dataString.toString()).length();
 								endW = wF-(strLen/2);
 								tmpStringBranch += returnSpacing(endW);
 								tmpStringData +=returnSpacing(endW-strLen/2);
-								tmpStringBranch +="/"+returnSpacing(5);
+								tmpStringBranch +="/"+returnSpacing(this.stringMax/2);
 								width -=3;
 							}
 						}else if(currNode.BranchType.equals("right")){
