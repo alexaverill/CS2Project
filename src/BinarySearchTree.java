@@ -315,7 +315,7 @@ public class BinarySearchTree {
 									tmpStringData +=returnSpacing(endW-(strLen/2));
 									tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
 									width -=3;
-								}else if(numLevel < 2){
+								}else if(currNode.parent.BranchType.equals("right")){
 										wF = width/2+width/6; //formula for the width, based on trial and error 
 										// we need to pad each string to be 10 chars as well
 										strLen = (currNode.dataString.toString()).length();
