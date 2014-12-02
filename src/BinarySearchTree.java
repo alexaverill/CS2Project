@@ -218,7 +218,7 @@ public class BinarySearchTree {
 		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
-		int width = (treeHeight*10)/2 +(numberPairs*10);
+		int width = (treeHeight*10)*2;
 		System.out.print(width);
 		int numLevel = 1;
 		String lastParent="";
