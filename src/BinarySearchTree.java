@@ -289,65 +289,29 @@ public class BinarySearchTree {
 							//System.out.print("test l"+currNode.parent.dataString);
 					//	}
 						if(currNode.BranchType.equals("left")){
-							
-								/*tmpStringBranch += returnSpacing(width/2+width/6);
-								tmpStringData += returnSpacing(width/2+width/8);*/
-								wF = width/2; //+width/6; //formula for the width, based on trial and error 
-								// we need to pad each string to be 10 chars as well
-								if(numLevel >= 2){
-									wF= 2;
-									strLen = (currNode.dataString.toString()).length();
-									endW = wF;
-									tmpStringBranch += returnSpacing(endW);
-									tmpStringData +=returnSpacing(endW-(strLen/2));
-									tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
-									width -=3;
-								/*}else if(currNode.parent.BranchType.equals("right")){
-										wF = width/2+width/6; //formula for the width, based on trial and error 
-										// we need to pad each string to be 10 chars as well
-										strLen = (currNode.dataString.toString()).length();
-										endW = wF-(strLen/2);
-										tmpStringBranch += returnSpacing(endW);
-										tmpStringData +=returnSpacing(endW-(strLen/2));
-										tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
-										//width -=5;
-							*/	}else{
+							if(numLevel != 1 &&currNode.parent.BranchType.equals("right")&& currNode.parent.level ==0){
+								wF = 1;
+								tmpStringBranch +=returnSpacing(10);
+								tmpStringData += returnSpacing(10);
+								tmpStringBranch +="/";
+							}else{
+									wF = width/2; //+width/6; //formula for the width, based on trial and error 
 									strLen = (currNode.dataString.toString()).length();
 									endW = wF;//-(strLen/2);
 									tmpStringBranch += returnSpacing(endW);
 									tmpStringData +=returnSpacing(endW-strLen/2);
-									tmpStringBranch +="/"+returnSpacing(1);
+									tmpStringBranch +="/";
 									width -=3;
-								}
-							
+							}
 						}else if(currNode.BranchType.equals("right")){
 								if(currNode.parent.leftBranch !=null){
+									if(currNode.parent.level == 0){
+										tmpStringBranch += returnSpacing(15);
+										tmpStringData +=returnSpacing(15);
+										currNode.level = 0;
+									}
 									tmpStringBranch += returnSpacing(1);
 									tmpStringData +=returnSpacing(1);
-								}else{
-									if(currNode.parent.dataString.equals(previousRoot)){
-										wF = width/4; //formula for the width, based on trial and error 
-									// we need to pad each string to be 10 chars as well
-										strLen = (currNode.dataString.toString()).length();
-										endW = wF-(strLen/2);
-										if(numLevel < 2){
-											tmpStringBranch += returnSpacing(endW);
-											tmpStringData +=returnSpacing(endW-(strLen/2));
-										}
-											//width -=5;
-									}else{
-										wF = width/2+width/6; //formula for the width, based on trial and error 
-										// we need to pad each string to be 10 chars as well
-										strLen = (currNode.dataString.toString()).length();
-										endW = wF-(strLen/2);
-										//tmpStringBranch += returnSpacing(endW);
-										//tmpStringData +=returnSpacing(endW);
-										if(numLevel < 2){
-											tmpStringBranch += returnSpacing(endW);
-											tmpStringData +=returnSpacing(endW +10);
-										}
-										//width -=5;
-									}
 								}
 							tmpStringBranch +="\\";
 							tmpStringData += "";
