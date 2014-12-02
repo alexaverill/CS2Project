@@ -17,6 +17,7 @@ public class BinarySearchTree {
 		String dataString;
 		Node parent;
 		String BranchType; //is this a left or right branch of parent
+		int level;
 		
 		Node (String stringInput){
 			leftBranch = null;
@@ -38,6 +39,7 @@ public class BinarySearchTree {
 		if(root  == null){
 			//if the bst is not yet created
 			root = newNode; //root
+			newNode.level = 0;
 		}
 		else{
 			//loop through tree
@@ -49,6 +51,7 @@ public class BinarySearchTree {
 						newNode.parent = temp;
 						newNode.BranchType = "left";
 						bRun = false;
+						newNode.level = (newNode.parent).level + 1;
 					}
 					else{
 						temp = temp.leftBranch;	
@@ -61,6 +64,7 @@ public class BinarySearchTree {
 						newNode.parent = temp;
 						newNode.BranchType = "right";
 						bRun = false;
+						newNode.level = (newNode.parent).level;
 					}
 					else{
 						temp = temp.rightBranch;
