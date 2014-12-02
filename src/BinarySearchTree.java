@@ -112,6 +112,11 @@ public class BinarySearchTree {
 		inorderRec(curr.leftBranch);
 		inorderList.add(curr.dataString);
 		inorderRec(curr.rightBranch);
+		
+		if(this.levelMax <= curr.level)
+		{
+			levelMax = curr.level;
+		}
 	}
 	
 	private void postorderRec(Node curr)
@@ -164,65 +169,19 @@ public class BinarySearchTree {
 		}
 		return spaces;
 	}
-	public int[] treeHeight(){
+	public int treeHeight(){
 		int treeHeight = 0;
-		int[] data = new int[2];
-		int numberPairs = 0;
 		if(root == null)
 		{
-			data[0] = treeHeight;
-			data[1] = numberPairs;
-			return data;
+			return treeHeight;
 		}
 		
-		Queue<Node> nodesQueue = new LinkedList<Node>();
-		int nodesInCurrentLevel = 1;
-		int nodesInNextLevel = 0;
+		inorderRec(root);
+		treeHeight = levelMax;
 		
-		nodesQueue.add(root);
-		boolean isRoot = true;
-		boolean hasPartner =  false;
-		while(!nodesQueue.isEmpty())
-				{
-					
-					Node currNode = nodesQueue.poll();
-					nodesInCurrentLevel--;
-					
-					if(currNode != null)
-					{
-					if(isRoot){
-						treeHeight++;
-						isRoot = false;
-					}else{
-						if(currNode.BranchType.equals("left")){
-							treeHeight++;
-							hasPartner = true;
-						}else if(currNode.BranchType.equals("right")){
-							if(hasPartner){
-								numberPairs ++;
-								hasPartner = false;
-							}else{
-								treeHeight++;
-							}
-						}
-					}
-						nodesQueue.add(currNode.leftBranch);
-						nodesQueue.add(currNode.rightBranch);
-						nodesInNextLevel += 2;
-						//hasPartner = false;
-						
-					}
-					
-					if(nodesInCurrentLevel == 0){
-						//System.out.println("");
-						nodesInCurrentLevel = nodesInNextLevel;
-						nodesInNextLevel = 0;
-					}
-				}
-		data[0] = treeHeight;
-		data[1] = numberPairs;
-		return data;
+		return treeHeight;
 	}
+
 	public void dfsOutput(){
 		ArrayList dfs = this.getPreorder();
 		for(int x=0;x<dfs.size(); x++){
