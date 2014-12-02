@@ -10,7 +10,8 @@ public class BinarySearchTree {
 	private ArrayList postorderList = new ArrayList();
 	//Config variables:
 	int stringMax = 8; //use this change the max length of strings, CAUTION FORMATTING MAY BE AFFECTED!	
-	int stringSpacing = stringMax/6;
+	int stringSpacing = stringMax;
+	int levelMax = 0;
 	private static class Node{
 		Node leftBranch;
 		Node rightBranch;
@@ -261,6 +262,7 @@ public class BinarySearchTree {
 		nodesQueue.add(root);
 		boolean hasPartner = false;
 		int width = (treeHeight*10)/2 +(numberPairs*10);
+		System.out.print(width);
 		int numLevel = 1;
 		String lastParent="";
 		while(!nodesQueue.isEmpty())
@@ -282,31 +284,12 @@ public class BinarySearchTree {
 					previousRoot = currNode.dataString;
 				}else{
 						
-						if(currNode.dataString.equals("ccc")){
+						//if(currNode.dataString.equals("ccc")){
 							//System.out.print(numLevel);
 							//System.out.print("test l"+currNode.parent.dataString);
-						}
+					//	}
 						if(currNode.BranchType.equals("left")){
-							if(currNode.parent.dataString.equals(previousRoot)){
-								wF = width/2; //formula for the width, based on trial and error 
-								// we need to pad each string to be 10 chars as well
-								if(numLevel >= 2){
-									wF = 2;
-									strLen = (currNode.dataString.toString()).length();
-									endW = wF;
-									tmpStringBranch += returnSpacing(endW);
-									tmpStringData +=returnSpacing(endW);
-									tmpStringBranch +="/"+returnSpacing(this.stringSpacing );
-									width -=3;
-								}else{
-									strLen = (currNode.dataString.toString()).length();
-									endW = wF;//-(strLen/2);
-									tmpStringBranch += returnSpacing(endW);
-									tmpStringData +=returnSpacing(endW-strLen/2);
-									tmpStringBranch +="/"+returnSpacing(this.stringSpacing );
-									width -=3;
-								}
-							}else{
+							
 								/*tmpStringBranch += returnSpacing(width/2+width/6);
 								tmpStringData += returnSpacing(width/2+width/8);*/
 								wF = width/2; //+width/6; //formula for the width, based on trial and error 
@@ -319,7 +302,7 @@ public class BinarySearchTree {
 									tmpStringData +=returnSpacing(endW-(strLen/2));
 									tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
 									width -=3;
-								}else if(currNode.parent.BranchType.equals("right")){
+								/*}else if(currNode.parent.BranchType.equals("right")){
 										wF = width/2+width/6; //formula for the width, based on trial and error 
 										// we need to pad each string to be 10 chars as well
 										strLen = (currNode.dataString.toString()).length();
@@ -328,15 +311,15 @@ public class BinarySearchTree {
 										tmpStringData +=returnSpacing(endW-(strLen/2));
 										tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
 										//width -=5;
-								}else{
+							*/	}else{
 									strLen = (currNode.dataString.toString()).length();
 									endW = wF;//-(strLen/2);
 									tmpStringBranch += returnSpacing(endW);
 									tmpStringData +=returnSpacing(endW-strLen/2);
-									tmpStringBranch +="/"+returnSpacing(this.stringSpacing);
+									tmpStringBranch +="/"+returnSpacing(1);
 									width -=3;
 								}
-							}
+							
 						}else if(currNode.BranchType.equals("right")){
 								if(currNode.parent.leftBranch !=null){
 									tmpStringBranch += returnSpacing(1);
@@ -344,7 +327,7 @@ public class BinarySearchTree {
 								}else{
 									if(currNode.parent.dataString.equals(previousRoot)){
 										wF = width/4; //formula for the width, based on trial and error 
-										// we need to pad each string to be 10 chars as well
+									// we need to pad each string to be 10 chars as well
 										strLen = (currNode.dataString.toString()).length();
 										endW = wF-(strLen/2);
 										if(numLevel < 2){
@@ -361,7 +344,7 @@ public class BinarySearchTree {
 										//tmpStringData +=returnSpacing(endW);
 										if(numLevel < 2){
 											tmpStringBranch += returnSpacing(endW);
-											tmpStringData +=returnSpacing(endW-(strLen/2));
+											tmpStringData +=returnSpacing(endW +10);
 										}
 										//width -=5;
 									}
@@ -376,7 +359,7 @@ public class BinarySearchTree {
 						if(numLevel > 1 ){
 							tmpStringData += currNode.dataString;
 						}else{
-							tmpStringData += currNode.dataString+returnSpacing(stringSpacing);
+							tmpStringData += currNode.dataString;
 						}
 						numLevel++;
 				}
