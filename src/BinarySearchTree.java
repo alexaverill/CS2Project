@@ -51,7 +51,7 @@ public class BinarySearchTree {
 						newNode.parent = temp;
 						newNode.BranchType = "left";
 						bRun = false;
-						newNode.level = (newNode.parent).level + 1;
+						newNode.level = (temp.level) + 1;
 					}
 					else{
 						temp = temp.leftBranch;	
@@ -64,7 +64,7 @@ public class BinarySearchTree {
 						newNode.parent = temp;
 						newNode.BranchType = "right";
 						bRun = false;
-						newNode.level = (newNode.parent).level;
+						newNode.level = (temp.level)+1;
 					}
 					else{
 						temp = temp.rightBranch;
