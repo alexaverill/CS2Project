@@ -18,6 +18,7 @@ public class BinarySearchTree {
 	int stringMax = 10; //use this change the max length of strings, CAUTION FORMATTING MAY BE AFFECTED!	
 	int stringSpacing = stringMax;
 	int levelMax = 0;
+	boolean isBST = true;
 	private static class Node{
 		Node leftBranch;
 		Node rightBranch;
@@ -86,6 +87,10 @@ public class BinarySearchTree {
 					else{
 						temp = temp.rightBranch;
 					}
+				}else{
+					System.out.println("Invalid Binary Search Tree, repeated element.");
+					isBST = false;
+					break;
 				}
 			}
 		}
@@ -204,13 +209,6 @@ public class BinarySearchTree {
 			String current = dfs.get(x).toString();
 			System.out.println(current);
 		}
-	}
-	public String returnDashes(int number){
-		String spaces = "";
-		for(int x=0; x<=number;x++){
-			spaces +="-";
-		}
-		return spaces;
 	}
 	public void treeOutput() throws IOException
 	{

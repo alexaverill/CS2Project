@@ -32,7 +32,7 @@ public class CS2Project
 			} 
 			catch (FileNotFoundException e) 
 			{
-				System.out.print("Invalid File!");
+				System.out.println("Invalid File!");
 				file = false;
 				//e.printStackTrace();
 			}
@@ -42,29 +42,30 @@ public class CS2Project
 				{
 					test.insert(stringFile.next());
 				}
-				
-				test.setPreorder();
-				test.setInorder();
-				test.setPostorder();
-				//write out three orders to files.
-				PrintWriter preOut = new PrintWriter("preorder.txt", "UTF-8");
-				PrintWriter inOut = new PrintWriter("inorder.txt", "UTF-8");
-				PrintWriter postOut = new PrintWriter("postorder.txt", "UTF-8");
-				preOut.println(test.getPreorder().toString());
-				preOut.close();
-				inOut.println(test.getInorder().toString());
-				inOut.close();
-				postOut.println(test.getPostorder().toString());
-				postOut.close();
-				System.out.println("PreOrder: "+test.getPreorder().toString());
-				System.out.println("InOrder: " +test.getInorder().toString());
-				System.out.println("PostOrder: "+test.getPostorder().toString());
-				//test.dfsOutput();
-				try {
-					test.treeOutput();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(test.isBST){
+					test.setPreorder();
+					test.setInorder();
+					test.setPostorder();
+					//write out three orders to files.
+					PrintWriter preOut = new PrintWriter("preorder.txt", "UTF-8");
+					PrintWriter inOut = new PrintWriter("inorder.txt", "UTF-8");
+					PrintWriter postOut = new PrintWriter("postorder.txt", "UTF-8");
+					preOut.println(test.getPreorder().toString());
+					preOut.close();
+					inOut.println(test.getInorder().toString());
+					inOut.close();
+					postOut.println(test.getPostorder().toString());
+					postOut.close();
+					System.out.println("PreOrder: "+test.getPreorder().toString());
+					System.out.println("InOrder: " +test.getInorder().toString());
+					System.out.println("PostOrder: "+test.getPostorder().toString());
+					//test.dfsOutput();
+					try {
+						test.treeOutput();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
