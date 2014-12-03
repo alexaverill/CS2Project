@@ -9,7 +9,7 @@ public class BinarySearchTree {
 	private ArrayList inorderList = new ArrayList();
 	private ArrayList postorderList = new ArrayList();
 	//Config variables:
-	int stringMax = 8; //use this change the max length of strings, CAUTION FORMATTING MAY BE AFFECTED!	
+	int stringMax = 10; //use this change the max length of strings, CAUTION FORMATTING MAY BE AFFECTED!	
 	int stringSpacing = stringMax;
 	int levelMax = 0;
 	private static class Node{
@@ -218,10 +218,9 @@ public class BinarySearchTree {
 		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
-		int width = (treeHeight*10)*2;
+		int width = (treeHeight*20);
 		System.out.print(width);
 		int numLevel = 1;
-		String lastParent="";
 		while(!nodesQueue.isEmpty())
 		{
 			
@@ -230,74 +229,49 @@ public class BinarySearchTree {
 			
 			if(currNode != null)
 			{
-				
+				int currentLevel = currNode.level;
 				if(isRoot){
 					//get length of root. 
 					int len = currNode.dataString.length();
-					//int spacing = ();
 					String spacingString = returnSpacing(width/2);
 					outputString += spacingString;
 					outputString += currNode.dataString;
 					previousRoot = currNode.dataString;
 				}else{
-						
-						//if(currNode.dataString.equals("ccc")){
-							//System.out.print(numLevel);
-							//System.out.print("test l"+currNode.parent.dataString);
-					//	}
-						if(currNode.BranchType.equals("left")){
-							if(numLevel != 1 &&currNode.parent.BranchType.equals("right")&& currNode.parent.level ==0){
-								wF = 1;
-								tmpStringBranch +=returnSpacing(10);
-								tmpStringData += returnSpacing(10);
-								tmpStringBranch +="/";
-							}else{
-									wF = width/2; //+width/6; //formula for the width, based on trial and error 
-									strLen = (currNode.dataString.toString()).length();
-									endW = wF;//-(strLen/2);
-									tmpStringBranch += returnSpacing(endW);
-									tmpStringData +=returnSpacing(endW-strLen/2);
-									tmpStringBranch +="/";
-									width -=3;
-							}
-						}else if(currNode.BranchType.equals("right")){
-								if(currNode.parent.leftBranch !=null){
-									if(currNode.parent.level == 0){
-										tmpStringBranch += returnSpacing(15);
-										tmpStringData +=returnSpacing(15);
-										currNode.level = 0;
-									}
-									tmpStringBranch += returnSpacing(1);
-									tmpStringData +=returnSpacing(1);
-								}
-							tmpStringBranch +="\\";
-							tmpStringData += "";
-						}
-						strLen = (currNode.dataString.toString()).length();
-						toFull = this.stringMax -strLen;
-						
-						//System.out.print(numLevel);
-						if(numLevel > 1 ){
-							tmpStringData += currNode.dataString;
+					levelMax = (int) Math.pow(2,currentLevel);
+					//System.out.print(levelMax);
+					if(currentLevel == 1 && currNode.BranchType.equals("left")){
+						System.out.print(returnSpacing(width/levelMax));
+					}else if(currentLevel == 1 && currNode.BranchType.equals("right")){
+						System.out.print(returnSpacing(width/levelMax));
+					}else if(currentLevel%2 == 1 && currNode.parent.BranchType.equals("right")){
+						System.out.print(returnSpacing(width/levelMax));
+					}else{
+						//System.out.print(levelMax);
+						if(levelMax <8){
+							System.out.print(returnSpacing((width*currentLevel)/levelMax));
 						}else{
-							tmpStringData += currNode.dataString;
+							System.out.print(returnSpacing((width*currentLevel/(levelMax/2))));
 						}
-						numLevel++;
+					}
+					int lengthToFill = this.stringMax - currNode.dataString.length();
+					System.out.print(currNode.dataString);
+					
 				}
-				//System.out.print(currNode.dataString + " ");
-				//System.out.print(currNode.BranchType);
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
 				//previousRoot = currNode.dataString;
-				nodesInNextLevel += 2;
-				//hasPartner = false;
-				
+				//if(currentLevel< (treeHeight+1)/2){
+					width -= width/4;
+				//}
+			
+				nodesInNextLevel += 2;		
 			}
 			
 			if(nodesInCurrentLevel == 0)
 			{
 				if(!isRoot){
-					outputString = tmpStringBranch +"\n"+tmpStringData;
+					outputString = tmpStringData;
 					tmpStringData = "";
 					tmpStringBranch = "";
 				}
