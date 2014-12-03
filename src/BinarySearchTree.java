@@ -226,7 +226,7 @@ public class BinarySearchTree {
 		nodesQueue.add(root);
 		boolean hasPartner = false;
 		int width = (treeHeight*45);
-		System.out.print(width);
+		//System.out.print(width);
 		int numLevel = 1;
 		int count = 0;
 		boolean emptyLeft = false;
