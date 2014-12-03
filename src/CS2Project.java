@@ -10,18 +10,19 @@ public class CS2Project
 {
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException
 	{
-		BinarySearchTree test = new BinarySearchTree();
+		
 		boolean file = false;
 		while(true){
+			BinarySearchTree test = new BinarySearchTree();
 			//loop until q is input.
 			Scanner in = new Scanner(System.in);
 			System.out.print("Enter a file name (q to quit): ");
-			//String input = in.next();
-			String input = "string3.txt";
+			String input = in.next();
+			//String input = "string.txt";
 			Scanner stringFile = null;
 			
 			if(input.equals("q")|| input.equals("Q") || input.equals("quit")){
-				break;
+				System.exit(0);
 			}
 			//Open File input stream.
 			try 

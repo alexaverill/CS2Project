@@ -277,7 +277,7 @@ public class BinarySearchTree {
 					}
 					if(emptyLeft){
 						if(currNode.BranchType.equals("left")){
-							tmpBranch +=(returnSpacing((width*currentLevel*4-this.stringMax/4)));
+							tmpBranch +=(returnSpacing((width*currentLevel*4-this.stringMax/2)));
 							
 							outputString += (returnSpacing((width*currentLevel*4)));
 							treeOut.write(returnSpacing((width*currentLevel*4)));
@@ -298,7 +298,7 @@ public class BinarySearchTree {
 					}
 					if((currNode.BranchType.equals("left") && count == 0 && currNode.overallType.equals("right"))){
 						//if we are a left branch on the RIGHT side of the root, and the first one being printed in this level.
-						tmpBranch +=(returnSpacing((width*2)*2));
+						tmpBranch +=(returnSpacing((width*3)+this.stringMax/4));
 						//tmpBranch += "/";
 						emptyLeft = true;
 						outputString += (returnSpacing((width*2)*2-this.stringMax));
