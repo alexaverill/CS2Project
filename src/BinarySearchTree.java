@@ -228,6 +228,8 @@ public class BinarySearchTree {
 		int width = (treeHeight*45);
 		System.out.print(width);
 		int numLevel = 1;
+		int count = 0;
+		boolean emptyLeft = false;
 		String whichside = "left";
 		while(!nodesQueue.isEmpty())
 		{
@@ -245,9 +247,27 @@ public class BinarySearchTree {
 					System.out.print(returnSpacing(width/2+width/4));
 					System.out.print(currNode.dataString);
 				}else{
-					if(currNode.BranchType.equals("right")&& currNode.parent.leftBranch == null){
+					if(currNode.BranchType.equals("right")&& count == 0 && currNode.overallType.equals("left")){
 						//System.out.print("lol");
 						System.out.print(returnSpacing(width/4));
+					}
+					if(emptyLeft){
+						
+						if(currNode.BranchType.equals("left")){
+							System.out.print(returnSpacing((width*currentLevel*4)));
+							//System.out.print(returnSpacing((width)));
+						}
+						if(currNode.BranchType.equals("right") && currNode.parent.leftBranch == null){
+							System.out.print(returnSpacing((width*currentLevel)*2+this.stringMax));
+							
+						}
+						if(currNode.BranchType.equals("right")&& currNode.parent.BranchType.equals("right") && currNode.parent.leftBranch == null){
+							System.out.print(returnSpacing((width*currentLevel)*7+this.stringMax));
+						}
+					}
+					if((currNode.BranchType.equals("left") && count == 0 && currNode.overallType.equals("right"))){
+						emptyLeft = true;
+						System.out.print(returnSpacing((width*2)*2-this.stringMax));
 					}
 					int spacing = (int) Math.pow(2,currentLevel)+1;
 					if((currNode.BranchType.equals("left") && currNode.overallType.equals(whichside))&& currNode.level !=1){
@@ -268,6 +288,7 @@ public class BinarySearchTree {
 					}else{
 						System.out.print(returnSpacing(width*2));
 					}*/
+					count++;
 					whichside = currNode.overallType;
 				}
 				nodesQueue.add(currNode.leftBranch);
@@ -292,6 +313,7 @@ public class BinarySearchTree {
 				nodesInCurrentLevel = nodesInNextLevel;
 				nodesInNextLevel = 0;
 				numLevel = 1;
+				count =0;
 				width = width/2;
 			}
 		}

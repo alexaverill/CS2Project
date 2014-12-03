@@ -13,7 +13,7 @@ public class CS2Project
 		//Open File input stream.
 		try 
 		{
-			stringFile = new Scanner(new File("string1.txt"));
+			stringFile = new Scanner(new File("string2.txt"));
 		} 
 		catch (FileNotFoundException e) 
 		{
