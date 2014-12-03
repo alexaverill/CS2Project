@@ -218,7 +218,7 @@ public class BinarySearchTree {
 		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
-		int width = (treeHeight*20);
+		int width = (treeHeight*45);
 		System.out.print(width);
 		int numLevel = 1;
 		while(!nodesQueue.isEmpty())
@@ -232,36 +232,35 @@ public class BinarySearchTree {
 				int currentLevel = currNode.level;
 				if(isRoot){
 					//get length of root. 
+					width = width/2;
 					int len = currNode.dataString.length();
-					String spacingString = returnSpacing(width/2);
-					outputString += spacingString;
-					outputString += currNode.dataString;
-					previousRoot = currNode.dataString;
-				}else{
-					levelMax = (int) Math.pow(2,currentLevel);
-					//System.out.print(levelMax);
-					if(currentLevel == 1 && currNode.BranchType.equals("left")){
-						System.out.print(returnSpacing(width/levelMax));
-					}else if(currentLevel == 1 && currNode.BranchType.equals("right")){
-						System.out.print(returnSpacing(width/levelMax));
-					}else{
-						
-						System.out.print(returnSpacing((width*currentLevel)/levelMax));
-					}
-					int lengthToFill = this.stringMax - currNode.dataString.length();
+					System.out.print(returnSpacing(width));
 					System.out.print(currNode.dataString);
+				}else{
+					
+					int spacing = (int) Math.pow(2,currentLevel)+1;
+					System.out.print(returnSpacing(width));
+					int side = this.stringMax -currNode.dataString.length();
+					int r = side/2;
+					int l = side/2;
+					//System.out.print(returnSpacing(r)+currNode.dataString+returnSpacing(l));
+					System.out.print(currNode.dataString);
+					if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
+						System.out.print(returnSpacing(width/3));
+					}else{
+						System.out.print(returnSpacing(width*2));
+					}
 					
 				}
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
 				//previousRoot = currNode.dataString;
 				//if(currentLevel< (treeHeight+1)/2){
-					width -= width/4;
+					
 				//}
 			
 				nodesInNextLevel += 2;		
 			}
-			
 			if(nodesInCurrentLevel == 0)
 			{
 				if(!isRoot){
@@ -275,6 +274,7 @@ public class BinarySearchTree {
 				nodesInCurrentLevel = nodesInNextLevel;
 				nodesInNextLevel = 0;
 				numLevel = 1;
+				width = width/2;
 			}
 		}
 	}
