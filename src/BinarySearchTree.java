@@ -1,3 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -199,7 +205,14 @@ public class BinarySearchTree {
 			System.out.println(current);
 		}
 	}
-	public void treeOutput()
+	public String returnDashes(int number){
+		String spaces = "";
+		for(int x=0; x<=number;x++){
+			spaces +="-";
+		}
+		return spaces;
+	}
+	public void treeOutput() throws IOException
 	{
 		//we are going to assume that we have a 10 character string to start.
 				//thus we can assume that the max width per level to be at minimum 20 characters.
@@ -221,7 +234,7 @@ public class BinarySearchTree {
 		boolean isRoot = true; //need to use this to control the branch display.
 		String outputString = "";
 		String tmpStringData="";
-		String tmpStringBranch="";
+		String tmpBranch="";
 		String previousRoot="";
 		nodesQueue.add(root);
 		boolean hasPartner = false;
@@ -231,6 +244,13 @@ public class BinarySearchTree {
 		int count = 0;
 		boolean emptyLeft = false;
 		String whichside = "left";
+		Writer treeOut = null;
+		try {
+			treeOut = new FileWriter("treeout.txt");
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		while(!nodesQueue.isEmpty())
 		{
 			
@@ -244,50 +264,83 @@ public class BinarySearchTree {
 					//get length of root. 
 					width = width/4;
 					int len = currNode.dataString.length();
-					System.out.print(returnSpacing(width/2+width/4));
-					System.out.print(currNode.dataString);
+					outputString += returnSpacing(width/2+width/4);
+					treeOut.write(returnSpacing(width/2+width/4));
+					outputString += (currNode.dataString);
+					treeOut.write(currNode.dataString);
 				}else{
 					if(currNode.BranchType.equals("right")&& count == 0 && currNode.overallType.equals("left")){
 						//System.out.print("lol");
-						System.out.print(returnSpacing(width/4));
+						tmpBranch += (returnSpacing(width/6+2));
+						outputString += (returnSpacing(width/6+2));
+						treeOut.write(returnSpacing(width/4));
 					}
 					if(emptyLeft){
-						
 						if(currNode.BranchType.equals("left")){
-							System.out.print(returnSpacing((width*currentLevel*4)));
+							tmpBranch +=(returnSpacing((width*currentLevel*4-this.stringMax/4)));
+							
+							outputString += (returnSpacing((width*currentLevel*4)));
+							treeOut.write(returnSpacing((width*currentLevel*4)));
 							//System.out.print(returnSpacing((width)));
 						}
 						if(currNode.BranchType.equals("right") && currNode.parent.leftBranch == null){
-							System.out.print(returnSpacing((width*currentLevel)*2+this.stringMax));
+							tmpBranch +=(returnSpacing((width*currentLevel)*2+this.stringMax));
+							//System.out.println(returnSpacing((width*currentLevel)*2+this.stringMax)+"\\");
+							outputString += (returnSpacing((width*currentLevel)*2+this.stringMax));
+							treeOut.write(returnSpacing((width*currentLevel)*2+this.stringMax));
 							
 						}
 						if(currNode.BranchType.equals("right")&& currNode.parent.BranchType.equals("right") && currNode.parent.leftBranch == null){
-							System.out.print(returnSpacing((width*currentLevel)*7+this.stringMax));
+							tmpBranch += (returnSpacing((width*currentLevel)*7+this.stringMax));
+							outputString += (returnSpacing((width*currentLevel)*7+this.stringMax));
+							treeOut.write(returnSpacing((width*currentLevel)*7+this.stringMax));
 						}
 					}
 					if((currNode.BranchType.equals("left") && count == 0 && currNode.overallType.equals("right"))){
+						//if we are a left branch on the RIGHT side of the root, and the first one being printed in this level.
+						tmpBranch +=(returnSpacing((width*2)*2));
+						//tmpBranch += "/";
 						emptyLeft = true;
-						System.out.print(returnSpacing((width*2)*2-this.stringMax));
+						outputString += (returnSpacing((width*2)*2-this.stringMax));
+						treeOut.write(returnSpacing((width*2)*2-this.stringMax));
 					}
+					
+					
 					int spacing = (int) Math.pow(2,currentLevel)+1;
 					if((currNode.BranchType.equals("left") && currNode.overallType.equals(whichside))&& currNode.level !=1){
-						System.out.print(returnSpacing(width/6+2));
+						//left branch of tree, and the same side of the tree of the last branch, and its not the first child
+						tmpBranch +=(returnSpacing(width/6+2));
+						outputString += (returnSpacing(width/6+2));
+						treeOut.write(returnSpacing(width/6+2));
 					}else{
-						System.out.print(returnSpacing(width-2));
+						//outputString +="/\\"+"\n";
+						tmpBranch +=(returnSpacing(width-2));
+						outputString += (returnSpacing(width-2));
+						treeOut.write(returnSpacing(width-2));
 					}
 					int side = this.stringMax -currNode.dataString.length();
 					int r = side/2;
 					int l = side/2;
 					//System.out.print(returnSpacing(r)+currNode.dataString+returnSpacing(l));
-					System.out.print(currNode.dataString);
-					if(currNode.BranchType.equals("left")&& currNode.parent.rightBranch == null){
-						System.out.print(returnSpacing(width+this.stringMax/6));
-					}
-					/*if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
-						System.out.print(returnSpacing(width/3));
+					if(currNode.BranchType.equals("left")){
+						tmpBranch += "/";
 					}else{
-						System.out.print(returnSpacing(width*2));
-					}*/
+						tmpBranch += "\\";
+					}
+					outputString += (currNode.dataString);
+					treeOut.write(currNode.dataString);
+					if(currNode.BranchType.equals("left")&& currNode.parent.rightBranch == null){
+						//left branch with no sibling. add a spacing area after so right overall branch is working.
+						tmpBranch += (returnSpacing(width+this.stringMax/6));
+						outputString += (returnSpacing(width+this.stringMax/6));
+						treeOut.write(returnSpacing(width+this.stringMax/6));
+					}
+					if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
+						tmpBranch += returnSpacing(currentLevel/4);
+						//System.out.print(returnSpacing(width/3));
+					}else{
+						tmpBranch += returnSpacing((width/4));
+					}
 					count++;
 					whichside = currNode.overallType;
 				}
@@ -302,12 +355,11 @@ public class BinarySearchTree {
 			}
 			if(nodesInCurrentLevel == 0)
 			{
-				if(!isRoot){
-					outputString = tmpStringData;
-					tmpStringData = "";
-					tmpStringBranch = "";
-				}
+				System.out.println(tmpBranch);
 				System.out.println(outputString);
+				outputString = "";
+				tmpBranch="";
+				treeOut.write("\n");
 				isRoot = false;
 				//System.out.println("");
 				nodesInCurrentLevel = nodesInNextLevel;
@@ -317,5 +369,6 @@ public class BinarySearchTree {
 				width = width/2;
 			}
 		}
+		treeOut.close();
 	}
 }
