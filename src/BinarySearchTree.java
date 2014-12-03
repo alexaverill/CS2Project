@@ -19,7 +19,7 @@ public class BinarySearchTree {
 		Node parent;
 		String BranchType; //is this a left or right branch of parent
 		int level;
-		
+		String overallType;
 		Node (String stringInput){
 			leftBranch = null;
 			rightBranch = null;
@@ -52,7 +52,12 @@ public class BinarySearchTree {
 						newNode.parent = temp;
 						newNode.BranchType = "left";
 						bRun = false;
-						newNode.level = (temp.level) + 1;
+						newNode.level = (temp.level) + 1; //keep track of level
+						if(newNode.level == 1){
+							newNode.overallType= "left";
+						}else{
+							newNode.overallType = newNode.parent.overallType;
+						}
 					}
 					else{
 						temp = temp.leftBranch;	
@@ -66,6 +71,11 @@ public class BinarySearchTree {
 						newNode.BranchType = "right";
 						bRun = false;
 						newNode.level = (temp.level)+1;
+						if(newNode.level == 1){
+							newNode.overallType= "right";
+						}else{
+							newNode.overallType = newNode.parent.overallType;
+						}
 					}
 					else{
 						temp = temp.rightBranch;
@@ -208,9 +218,6 @@ public class BinarySearchTree {
 		int treeHeight = treeHeight(); // use to calculate width of window;
 		int wF;//formula for the width, based on trial and error 
 		// we need to pad each string to be 10 chars as well
-		int strLen;
-		int toFull;
-		int endW;
 		boolean isRoot = true; //need to use this to control the branch display.
 		String outputString = "";
 		String tmpStringData="";
@@ -221,6 +228,7 @@ public class BinarySearchTree {
 		int width = (treeHeight*45);
 		System.out.print(width);
 		int numLevel = 1;
+		String whichside = "left";
 		while(!nodesQueue.isEmpty())
 		{
 			
@@ -232,25 +240,35 @@ public class BinarySearchTree {
 				int currentLevel = currNode.level;
 				if(isRoot){
 					//get length of root. 
-					width = width/2;
+					width = width/4;
 					int len = currNode.dataString.length();
-					System.out.print(returnSpacing(width));
+					System.out.print(returnSpacing(width/2+width/4));
 					System.out.print(currNode.dataString);
 				}else{
-					
+					if(currNode.BranchType.equals("right")&& currNode.parent.leftBranch == null){
+						//System.out.print("lol");
+						System.out.print(returnSpacing(width/4));
+					}
 					int spacing = (int) Math.pow(2,currentLevel)+1;
-					System.out.print(returnSpacing(width));
+					if((currNode.BranchType.equals("left") && currNode.overallType.equals(whichside))&& currNode.level !=1){
+						System.out.print(returnSpacing(width/6+2));
+					}else{
+						System.out.print(returnSpacing(width-2));
+					}
 					int side = this.stringMax -currNode.dataString.length();
 					int r = side/2;
 					int l = side/2;
 					//System.out.print(returnSpacing(r)+currNode.dataString+returnSpacing(l));
 					System.out.print(currNode.dataString);
-					if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
+					if(currNode.BranchType.equals("left")&& currNode.parent.rightBranch == null){
+						System.out.print(returnSpacing(width+this.stringMax/6));
+					}
+					/*if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
 						System.out.print(returnSpacing(width/3));
 					}else{
 						System.out.print(returnSpacing(width*2));
-					}
-					
+					}*/
+					whichside = currNode.overallType;
 				}
 				nodesQueue.add(currNode.leftBranch);
 				nodesQueue.add(currNode.rightBranch);
