@@ -244,15 +244,9 @@ public class BinarySearchTree {
 						System.out.print(returnSpacing(width/levelMax));
 					}else if(currentLevel == 1 && currNode.BranchType.equals("right")){
 						System.out.print(returnSpacing(width/levelMax));
-					}else if(currentLevel%2 == 1 && currNode.parent.BranchType.equals("right")){
-						System.out.print(returnSpacing(width/levelMax));
 					}else{
-						//System.out.print(levelMax);
-						if(levelMax <8){
-							System.out.print(returnSpacing((width*currentLevel)/levelMax));
-						}else{
-							System.out.print(returnSpacing((width*currentLevel/(levelMax/2))));
-						}
+						
+						System.out.print(returnSpacing((width*currentLevel)/levelMax));
 					}
 					int lengthToFill = this.stringMax - currNode.dataString.length();
 					System.out.print(currNode.dataString);
