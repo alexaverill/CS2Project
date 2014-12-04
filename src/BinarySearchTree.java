@@ -212,11 +212,7 @@ public class BinarySearchTree {
 	}
 	public void treeOutput() throws IOException
 	{
-		//we are going to assume that we have a 10 character string to start.
-				//thus we can assume that the max width per level to be at minimum 20 characters.
-				//however we need to have padding so if we assume that we have 10 char padding overall
-				// and then a 5 char before element 1 and then 5 after element 1
-				//max width then become 30 characters, so if we put the root at 15-1/2(root.length)
+		//display tree to STOUT as well as write to a file.
 				
 		if(root == null)
 		{
@@ -227,15 +223,11 @@ public class BinarySearchTree {
 		int nodesInCurrentLevel = 1;
 		int nodesInNextLevel = 0;
 		int treeHeight = treeHeight(); // use to calculate width of window;
-		int wF;//formula for the width, based on trial and error 
 		// we need to pad each string to be 10 chars as well
 		boolean isRoot = true; //need to use this to control the branch display.
 		String outputString = "";
-		String tmpStringData="";
 		String tmpBranch="";
-		String previousRoot="";
 		nodesQueue.add(root);
-		boolean hasPartner = false;
 		int width = (treeHeight*45);
 		//System.out.print(width);
 		int numLevel = 1;
@@ -244,7 +236,7 @@ public class BinarySearchTree {
 		String whichside = "left";
 		Writer treeOut = null;
 		try {
-			treeOut = new FileWriter("treeout.txt");
+			treeOut = new FileWriter("treeout.txt",false);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -276,14 +268,11 @@ public class BinarySearchTree {
 					if(emptyLeft){
 						if(currNode.BranchType.equals("left")){
 							tmpBranch +=(returnSpacing((width*currentLevel*4-this.stringMax/2)));
-							
 							outputString += (returnSpacing((width*currentLevel*4)));
 							treeOut.write(returnSpacing((width*currentLevel*4)));
-							//System.out.print(returnSpacing((width)));
 						}
 						if(currNode.BranchType.equals("right") && currNode.parent.leftBranch == null){
 							tmpBranch +=(returnSpacing((width*currentLevel)*2+this.stringMax));
-							//System.out.println(returnSpacing((width*currentLevel)*2+this.stringMax)+"\\");
 							outputString += (returnSpacing((width*currentLevel)*2+this.stringMax));
 							treeOut.write(returnSpacing((width*currentLevel)*2+this.stringMax));
 							
@@ -297,29 +286,21 @@ public class BinarySearchTree {
 					if((currNode.BranchType.equals("left") && count == 0 && currNode.overallType.equals("right"))){
 						//if we are a left branch on the RIGHT side of the root, and the first one being printed in this level.
 						tmpBranch +=(returnSpacing((width*3)+this.stringMax/4));
-						//tmpBranch += "/";
 						emptyLeft = true;
 						outputString += (returnSpacing((width*2)*2-this.stringMax));
 						treeOut.write(returnSpacing((width*2)*2-this.stringMax));
 					}
-					
-					
-					int spacing = (int) Math.pow(2,currentLevel)+1;
 					if((currNode.BranchType.equals("left") && currNode.overallType.equals(whichside))&& currNode.level !=1){
 						//left branch of tree, and the same side of the tree of the last branch, and its not the first child
 						tmpBranch +=(returnSpacing(width/6+2));
 						outputString += (returnSpacing(width/6+2));
 						treeOut.write(returnSpacing(width/6+2));
 					}else{
-						//outputString +="/\\"+"\n";
 						tmpBranch +=(returnSpacing(width-2));
 						outputString += (returnSpacing(width-2));
 						treeOut.write(returnSpacing(width-2));
 					}
-					int side = this.stringMax -currNode.dataString.length();
-					int r = side/2;
-					int l = side/2;
-					//System.out.print(returnSpacing(r)+currNode.dataString+returnSpacing(l));
+					//determine which direction to display the "branches"
 					if(currNode.BranchType.equals("left")){
 						tmpBranch += "/";
 					}else{
@@ -334,32 +315,33 @@ public class BinarySearchTree {
 						treeOut.write(returnSpacing(width+this.stringMax/6));
 					}
 					if(currNode.BranchType.equals("left") && currNode.parent.rightBranch != null){
+						//leftbranch, that has a right sibling
 						tmpBranch += returnSpacing(currentLevel/4);
-						//System.out.print(returnSpacing(width/3));
+						
 					}else{
 						tmpBranch += returnSpacing((width/4));
 					}
 					count++;
 					whichside = currNode.overallType;
 				}
+				//advance to next level;
 				nodesQueue.add(currNode.leftBranch);
-				nodesQueue.add(currNode.rightBranch);
-				//previousRoot = currNode.dataString;
-				//if(currentLevel< (treeHeight+1)/2){
-					
-				//}
-			
+				nodesQueue.add(currNode.rightBranch);			
 				nodesInNextLevel += 2;		
 			}
 			if(nodesInCurrentLevel == 0)
 			{
 				System.out.println(tmpBranch);
 				System.out.println(outputString);
+				//write tree to file
+				treeOut.write(tmpBranch);
+				treeOut.write("\n");
+				treeOut.write(outputString);
+				treeOut.write("\n");
 				outputString = "";
 				tmpBranch="";
-				treeOut.write("\n");
+				
 				isRoot = false;
-				//System.out.println("");
 				nodesInCurrentLevel = nodesInNextLevel;
 				nodesInNextLevel = 0;
 				numLevel = 1;
@@ -367,6 +349,6 @@ public class BinarySearchTree {
 				width = width/2;
 			}
 		}
-		treeOut.close();
+		treeOut.close(); //close file out.
 	}
 }

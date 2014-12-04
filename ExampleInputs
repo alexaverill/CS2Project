@@ -1,0 +1,52 @@
+Example Inputs and Outputs:
+INPUT: Test test aaa bbb ccc zzz hello Hello aaaaaaa
+
+OUTPUT:
+PreOrder: [Test, Hello, test, aaa, bbb, aaaaaaa, ccc, hello, zzz]
+InOrder: [Hello, Test, aaa, aaaaaaa, bbb, ccc, hello, test, zzz]
+PostOrder: [Hello, aaaaaaa, hello, ccc, bbb, aaa, zzz, test, Test]
+
+                                           Test
+                           /                            \        
+                           Hello                           test
+                                                  /              \    
+                                                    aaa             zzz
+                                                           \  
+                                                           bbb
+                                                           /    \ 
+                                                       aaaaaaa  ccc
+                                                                   \ 
+                                                                   hello
+
+
+INPUT: mm bb aa zz xx ii ll
+OUTPUT:
+PreOrder: [mm, bb, aa, ii, ll, zz, xx]
+InOrder: [aa, bb, ii, ll, mm, xx, zz]
+PostOrder: [aa, ll, ii, bb, xx, zz, mm]
+
+                         mm
+               /                \     
+               bb               zz
+       /        \          /             
+       aa       ii       xx          
+      \  
+      ll
+
+INPUT:mm ff ss dd hh pp vv aa ee gg ii oo qq uu ww
+OUTPUT:
+PreOrder: [mm, ff, dd, aa, ee, hh, gg, ii, ss, pp, oo, qq, vv, uu, ww]
+InOrder: [aa, dd, ee, ff, gg, hh, ii, mm, oo, pp, qq, ss, uu, vv, ww]
+PostOrder: [aa, ee, dd, gg, ii, hh, ff, oo, qq, pp, uu, ww, vv, ss, mm]
+
+                         mm
+               /                \     
+               ff               ss
+       /        \          /        \   
+       dd       hh       pp       vv
+   /    \     /    \     /    \     /    \  
+   aa   ee   gg   ii   oo   qq   uu   ww
+
+
+INPUT:m n o a b c o 
+OUTPUT:Invalid Binary Search Tree, repeated element.
