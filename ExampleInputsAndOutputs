@@ -1,5 +1,5 @@
 ﻿Example Inputs and Outputs:
-Inpu File: rightBranch.txt
+Input File: rightBranch.txt
 INPUT: Test test aaa bbb ccc zzz hello Hello aaaaaaa
 
 OUTPUT:
@@ -51,4 +51,8 @@ PostOrder: [aa, ee, dd, gg, ii, hh, ff, oo, qq, pp, uu, ww, vv, ss, mm]
 
 Input File: invalid.txt
 INPUT:m n o a b c o 
+OUTPUT:Invalid Binary Search Tree, repeated element.
+
+Input File: invalid1.txt
+INPUT:aa aa aa aa 
 OUTPUT:Invalid Binary Search Tree, repeated element.
