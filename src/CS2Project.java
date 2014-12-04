@@ -47,9 +47,9 @@ public class CS2Project
 					test.setInorder();
 					test.setPostorder();
 					//write out three orders to files.
-					PrintWriter preOut = new PrintWriter("preorder.txt", "UTF-8");
-					PrintWriter inOut = new PrintWriter("inorder.txt", "UTF-8");
-					PrintWriter postOut = new PrintWriter("postorder.txt", "UTF-8");
+					PrintWriter preOut = new PrintWriter("preorder.out", "UTF-8");
+					PrintWriter inOut = new PrintWriter("inorder.out", "UTF-8");
+					PrintWriter postOut = new PrintWriter("postorder.out", "UTF-8");
 					preOut.println(test.getPreorder().toString());
 					preOut.close();
 					inOut.println(test.getInorder().toString());
