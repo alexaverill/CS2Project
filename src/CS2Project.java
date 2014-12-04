@@ -1,4 +1,13 @@
-//Default Class for the CS project
+/*
+ * 
+ * This is the CS2 Binary Search Tree project.
+ * Written by:
+ * Alex Averill
+ * James Campbell
+ * Travis Wright
+ * 
+ * 
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

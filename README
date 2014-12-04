@@ -1,0 +1,11 @@
+This is the CS2 Binary Search Tree project.
+Written by:
+Alex Averill
+James Campbell
+Travis Wright
+
+Limitations:
+The max character count for strings input is 8. 
+
+Run CS2Project, and have text files be in the root directory in the same location as this README file. Those files can be called as an input in the 
+program itself.
