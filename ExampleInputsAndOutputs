@@ -1,4 +1,5 @@
-Example Inputs and Outputs:
+﻿Example Inputs and Outputs:
+Inpu File: rightBranch.txt
 INPUT: Test test aaa bbb ccc zzz hello Hello aaaaaaa
 
 OUTPUT:
@@ -18,7 +19,7 @@ PostOrder: [Hello, aaaaaaa, hello, ccc, bbb, aaa, zzz, test, Test]
                                                                    \ 
                                                                    hello
 
-
+Input File: leftBranch.txt 
 INPUT: mm bb aa zz xx ii ll
 OUTPUT:
 PreOrder: [mm, bb, aa, ii, ll, zz, xx]
@@ -33,6 +34,7 @@ PostOrder: [aa, ll, ii, bb, xx, zz, mm]
       \  
       ll
 
+Input File: fullTree.txt
 INPUT:mm ff ss dd hh pp vv aa ee gg ii oo qq uu ww
 OUTPUT:
 PreOrder: [mm, ff, dd, aa, ee, hh, gg, ii, ss, pp, oo, qq, vv, uu, ww]
@@ -47,6 +49,6 @@ PostOrder: [aa, ee, dd, gg, ii, hh, ff, oo, qq, pp, uu, ww, vv, ss, mm]
    /    \     /    \     /    \     /    \  
    aa   ee   gg   ii   oo   qq   uu   ww
 
-
+Input File: invalid.txt
 INPUT:m n o a b c o 
 OUTPUT:Invalid Binary Search Tree, repeated element.
